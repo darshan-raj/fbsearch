@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Facebook Search</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<!--script type="text/javascript" src="https://graph.facebook.com/search?q=audi&type=page&access_token=CAACEdEose0cBAPfZAi7dXFHZCwwdgL1eTWzrfcySGJbiXqMTFVJyVKeZB2YXP0ZBRk6XW8hZCEUIyMj54N4DriMVnqvls9fXCuHdctcf596TTnJE9HlTk4bVeZA4ZCZAuTrXKLl3LKE6vq1zcdcqeQ0oLWhBvwNsPw0XWO0W7NdPrWTfkFxUkyA7GypovxgSL20ZD&callback=test"></script-->
+		<script src="js/app.js"></script>
+		<script src="js/view.js"></script>
+		<script src="js/model.js"></script>
+		<script src="js/communicator.js"></script>
+		<script src="js/utils.js"></script>
+			</head>
+	<body>
+		<header class="main-header">
+			<div class="control-bar clear-fix">
+				<div class="search-control">
+					<input id="search-input" placeholder="Please type here to search facebook pages" />
+					<button id="search-btn">Search</button>
+				</div>
+				<div class="fav-control">
+					<a href="javascript:void(0)" id="fav-link">My Favorites</a>
+				</div>
+			</div>
+			<div id="content-header">Search Results</div>
+		</header>
+		<section id="main-wrapper"></section>
+	</body>
+
+	<script>
+		(function(){
+			// search button click
+			document.querySelector("#search-btn").addEventListener("click", function(){
+				var searchTerm = document.querySelector("#search-input").value.trim();
+				if(searchTerm){
+					FBS.doSearch(searchTerm);
+				}
+				document.querySelector("#content-header").textContent = "Search results for " + searchTerm;
+			});
+
+			// show favorites
+			document.querySelector("#fav-link").addEventListener("click", function(){
+					FBS.showFavorites();
+					document.querySelector("#content-header").textContent = "My Favorites";
+			});
+
+			// bootstrap the libraries
+			FBS.init({
+				holder : document.querySelector("#main-wrapper")
+			});
+		})();
+	</script>
+</html>

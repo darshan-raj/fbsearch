@@ -1,0 +1,121 @@
+body{
+	font-family: Arial;
+	padding: 0px;
+	margin: 0px;
+}
+button{
+
+}
+div, section, header{
+	box-sizing:border-box;
+}
+
+.clear-fix::after{
+	visibility:hidden;
+	display:block;
+	font-size:0;
+	content:" ";
+	clear:both;
+	height:0
+}
+
+.main-header{
+	position: fixed;
+	top: 0px;	
+	width: 100%;
+}
+.control-bar{
+	background-color: #0c6a93;
+	padding: 8px;
+}
+#content-header{
+	padding: 8px;
+	background-color: #fff;
+}
+
+#main-wrapper{
+	margin-top: 87px;
+}
+.fav-control{
+	float: right;
+}
+.search-control{
+	float: left;
+}
+#search-input{
+	padding: 6px;
+	width:250px;
+}
+#fav-link{
+	color:#fff;
+	font-weight: bold;
+}
+
+.content-wrapper{
+	font-size: 14px;
+}
+
+#search-result-holder{
+	width: 40%;
+	float: left;
+	/*border: 1px solid #ccc;*/
+}
+#detail-holder{
+	width: 60%;
+	position: fixed;
+	right: 0px;
+}
+
+.row{
+	height: 60px;
+	clear: both;
+	padding: 8px;
+	border-bottom: 1px solid #ccc;
+	cursor: pointer;
+}
+.row:hover{
+	background-color: #eee;
+}
+
+.fav, .name, .category{
+	float: left;
+}
+
+.fav{
+	width: 24px;
+	height: 24px;
+	margin-right: 20px;
+	background:url("../images/not-favorite.png") no-repeat top left;
+	background-size:contain;
+}
+.fav.is-fav{
+	background:url("../images/favorite.png") no-repeat top left;
+	background-size:contain;
+}
+.fav:not(.is-fav):hover{
+	background:url("../images/fav-hover.png") no-repeat top left;
+	background-size:contain;
+}
+.name{
+	width: 220px;
+	font-weight: bold;
+}
+.category{
+	/*width: 70px;*/
+	color: #666;
+	font-size: 12px;
+	font-weight: bold
+}
+
+.page-wrapper {
+
+}
+
+.page-wrapper #page-name{
+	font-size: 14px;
+	font-weight: bold;
+}
+.page-wrapper #page-image{
+	float: right;
+	width: 115px;
+}
