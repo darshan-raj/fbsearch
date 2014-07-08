@@ -16,8 +16,14 @@ FBS.Model = function(){
 	}
 
 	var setSearchResults = function(response){
-		var searchList = response.data.slice(0, 50),
+		var searchList,
 			item;
+		if(response.data){
+			searchList = response.data.slice(0, 50);
+		} else{
+			//handle error
+			return;
+		}
 		model.searchResults = [];
 		for(var i=0, len = searchList.length; i<len; i++){
 			item = searchList[i];
@@ -35,6 +41,10 @@ FBS.Model = function(){
 		var id = data.id,
 			dataOb = {};
 
+		if(!data.id){
+			// handle error
+			return;
+		}
 		dataOb.id = data.id;
 		dataOb.name = data.name;
 		dataOb.category = data.category;

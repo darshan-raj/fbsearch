@@ -1,10 +1,12 @@
 FBS.Utils = function(){
+	// api to convert a string html template to dom node
 	var createDomNode = function(template){
 		var el = document.createElement("div");
 		el.innerHTML = template;
 		return el.firstChild;
 	}
 
+	// the local storage library
 	var Store = function(){
 		var ls = window.localStorage;
 

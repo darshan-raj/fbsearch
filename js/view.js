@@ -6,7 +6,7 @@ FBS.View = function(){
 							'<div class="category">{CATEGORY}</div>' +
 						'</div>',
 		"mainView" : '<div class="content-wrapper">' +
-						'<div id="search-result-holder"></div>' +
+						'<div id="search-result-holder" data-mode="search"></div>' +
 					 	'<div id="detail-holder"></div>' +
 					 '</div>',
 		"pageDetail" : '<div class="page-wrapper">' +
@@ -23,6 +23,7 @@ FBS.View = function(){
 	var searchHolder,
 		pageHolder;
 
+	// the class representing each list view item
 	var SearchListItem = function(){
 		this.data = null;
 		this.pageId = null;
@@ -48,7 +49,6 @@ FBS.View = function(){
 		// attach events
 		domEl.addEventListener("click", this.onItemSelect.bind(this));
 		domEl.querySelector(".fav").addEventListener("click", this.favoriteHandler.bind(this));
-
 	}
 
 	SearchListItem.prototype.onItemSelect = function(e){
@@ -56,12 +56,16 @@ FBS.View = function(){
 	}
 
 	SearchListItem.prototype.favoriteHandler = function(e){
+		var mode = this.holder.getAttribute("data-mode");
 		e.stopPropagation();
 		if(this.isFavorite){
 			this.onUnFavorite && this.onUnFavorite.call(this, this.pageId);
 			this.isFavorite = false;
 			// view change
 			this.viewEl.querySelector(".fav").classList.remove("is-fav");
+			if(mode == "fav"){
+				this.viewEl.parent.removeChild(this.viewEl);
+			}
 		} else{
 			this.onFavorite && this.onFavorite.call(this, this.pageId);
 			this.isFavorite = true;
@@ -85,7 +89,8 @@ FBS.View = function(){
 		}
 	}
 
-	var renderSearchResults = function(data){
+	// renders the list view
+	var renderList = function(data){
 		var searchItem;
 		searchHolder.innerHTML = "";
 		for(var i=0, len=data.length; i<len; i++){
@@ -108,6 +113,22 @@ FBS.View = function(){
 		}
 	}
 
+	// @public
+	// api to render the search results
+	var renderSearchResults = function(data){
+		searchHolder.setAttribute("data-mode", "search");
+		renderList(data);
+	}
+
+	// @public
+	// api to render the favorites
+	var renderFavorites = function(data){
+		searchHolder.setAttribute("data-mode", "fav");
+		renderList(data);
+	}
+
+	// @public
+	// api to show the detail view of a page
 	var renderPageDetails = function(data){
 		var markup = templates["pageDetail"],
 			viewEl;
@@ -125,6 +146,8 @@ FBS.View = function(){
 		pageHolder.appendChild(viewEl);
 	}
 
+	// @public
+	// init and bootstrap the view elements
 	var init = function(config){
 		var mainViewEl = FBS.Utils.createDomNode(templates.mainView);
 		config.holder.appendChild(mainViewEl);
@@ -136,7 +159,8 @@ FBS.View = function(){
 		init : init,
 		on : on,
 		renderSearchResults : renderSearchResults,
-		renderPageDetails : renderPageDetails
+		renderPageDetails : renderPageDetails,
+		renderFavorites : renderFavorites
 	}
 
 }();

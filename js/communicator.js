@@ -83,6 +83,8 @@ FBS.Communicator = function(){
 		//fbCallback(z);
 	}
 
+	// @public
+	// the api being exposed as the jsonp callback
 	var fbCallback = function(response){
 		appCallback.call(null, response);
 	}
