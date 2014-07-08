@@ -20,20 +20,33 @@
 					<a href="javascript:void(0)" id="fav-link">My Favorites</a>
 				</div>
 			</div>
-			<div id="content-header">Search Results</div>
+			<div id="content-header">Search the facebook pages</div>
 		</header>
 		<section id="main-wrapper"></section>
 	</body>
 
 	<script>
 		(function(){
-			// search button click
-			document.querySelector("#search-btn").addEventListener("click", function(){
+			var doSearch = function(){
 				var searchTerm = document.querySelector("#search-input").value.trim();
 				if(searchTerm){
 					FBS.doSearch(searchTerm);
 				}
 				document.querySelector("#content-header").textContent = "Search results for " + searchTerm;
+			}
+
+			// search button click
+			document.querySelector("#search-btn").addEventListener("click", function(){
+				doSearch();
+			});
+			// keyboard enter
+			document.querySelector("#search-input").addEventListener("keyup", function(e){
+				var searchTerm,
+					charCode = e.which ? e.which : e.keyCode;
+				if(charCode == "13"){
+					e.preventDefault();
+					doSearch();
+				}
 			});
 
 			// show favorites

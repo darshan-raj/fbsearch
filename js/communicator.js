@@ -1,5 +1,5 @@
 FBS.Communicator = function(){
-	var token = "CAACEdEose0cBAGFrs41FQxSMKgj4w6aSvMXzAJyySEWDMeeavBs9eXRU3672aTEB6ZC4ZASEsZCRe7gCkUEtL0EA0J1W8mkO1KuchyCf4zFk9qJhBP44HwsG0aogHU315Eisc4sS5X1YPp91GDRjfGCS6rik6kBLzyrceYgDOuGho7RZCIV3WeItA4ichqYZD";
+	var token = "CAACEdEose0cBAItGfQuzkGnCawJsBmSUJBuZB9WzodURuNcQvNjnIXZA0K9LNyD6aRrEDw51TfrY5YjIcQfHjMB3DhuxyP0h87rx2QbtId06woSySvQyqlF7TfMVLXuxyYomX51t93oytJLlM8uB6w0u9R8Wg5im3ULPZADQS5q9QL5o4kjvZBf0p3xXLk8ZD";
 	var appCallback;
 
 	var fireRequest = function(query){

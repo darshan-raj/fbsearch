@@ -13,7 +13,8 @@ var FBS = (function(){
  	}
 
 	var showFavorites = function(){
-		FBS.View.renderSearchResults(FBS.Model.getData("favorites"));
+		FBS.View.reset();
+		FBS.View.renderFavorites(FBS.Model.getData("favorites"));
 	}
 
 	var showPageDetails = function(pageId){
@@ -21,6 +22,7 @@ var FBS = (function(){
 		if(FBS.Model.getData("page", pageId)){
 			FBS.View.renderPageDetails(FBS.Model.getData("page", pageId));
 		} else{
+			FBS.View.showLoader();
 			FBS.Communicator.getPageDetail(pageId, function(response){
 				if(response){
 					FBS.Model.setData("page", response);
@@ -38,6 +40,7 @@ var FBS = (function(){
 				renderSearchResults();
 			}
 		});
+		FBS.View.reset();
 	}
 
 	var init = function(config){

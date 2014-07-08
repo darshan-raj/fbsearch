@@ -10,14 +10,16 @@ FBS.View = function(){
 					 	'<div id="detail-holder"></div>' +
 					 '</div>',
 		"pageDetail" : '<div class="page-wrapper">' +
-							'<div id="page-name">{NAME}</div>' +
-							'<img id="page-image" src="{IMAGE}"/>' +
-							'<div id="page-category">{CATEGORY}</div>' +
+							'<div class="page-image-wrapper"><img id="page-image" src="{IMAGE}"/></div>' +
+							'<div class="name" id="page-name">{NAME}</div>' +
+							'<div class="category" id="page-category">{CATEGORY}</div>' +
 							'<div id="page-about">{ABOUT}</div>' +
-							'<div id="page-likes">{LIKES}</div>' +
-							'<a id="page-link">{PAGE_LINK}</a>' +
-							'<a id="page-website">{WEBSITE_LINK}</a>' +
-						'</div>'
+							'<div id="page-likes"><span class="label">Likes : </span>{LIKES}</div>' +
+							'<div><span class="label">Page : </span><a id="page-link" href="{PAGE_LINK}" target="_blank">{PAGE_LINK}</a></div>' +
+							'<div><span class="label">Website : </span><a id="page-website" href="{WEBSITE_LINK}" target="_blank">{WEBSITE_LINK}</a></div>' +
+						'</div>',
+		"loader" : '<div class="loader"></div>',
+		"sessionExpiry" : '<div>The access token has expired</div>'
 	}
 
 	var searchHolder,
@@ -52,7 +54,14 @@ FBS.View = function(){
 	}
 
 	SearchListItem.prototype.onItemSelect = function(e){
+		var currentSelected;
 		this.onSelect && this.onSelect.call(this, this.pageId);
+		// view changes
+		currentSelected = this.holder.querySelector(".selected");
+		if(currentSelected){
+			currentSelected.classList.remove("selected");
+		}
+		this.viewEl.classList.add("selected");
 	}
 
 	SearchListItem.prototype.favoriteHandler = function(e){
@@ -64,7 +73,7 @@ FBS.View = function(){
 			// view change
 			this.viewEl.querySelector(".fav").classList.remove("is-fav");
 			if(mode == "fav"){
-				this.viewEl.parent.removeChild(this.viewEl);
+				this.viewEl.parentNode.removeChild(this.viewEl);
 			}
 		} else{
 			this.onFavorite && this.onFavorite.call(this, this.pageId);
@@ -76,11 +85,9 @@ FBS.View = function(){
 
 	// the event lib implementation
 	var events = {};
-	
 	var on = function(event, callback){
 		events[event] ? events[event].push(callback) : events[event] = [callback];
 	}
-	
 	var trigger = function(event, params){
 		if(events[event]){
 			for(var i=0, len=events[event].length; i<len; i++){
@@ -92,7 +99,6 @@ FBS.View = function(){
 	// renders the list view
 	var renderList = function(data){
 		var searchItem;
-		searchHolder.innerHTML = "";
 		for(var i=0, len=data.length; i<len; i++){
 			searchItem = new SearchListItem();
 			searchItem.pageId = data[i].pageId;
@@ -138,12 +144,27 @@ FBS.View = function(){
 		markup = markup.replace("{CATEGORY}", data.category);
 		markup = markup.replace("{ABOUT}", data.about);
 		markup = markup.replace("{LIKES}", data.likes);
-		markup = markup.replace("{PAGE_LINK}", data.link);
-		markup = markup.replace("{WEBSITE_LINK}", data.website);
+		markup = markup.replace(/{PAGE_LINK}/g, data.link);
+		markup = markup.replace(/{WEBSITE_LINK}/g, data.website);
 
 		viewEl = FBS.Utils.createDomNode(markup);
 		pageHolder.innerHTML = "";
 		pageHolder.appendChild(viewEl);
+	}
+
+	var reset = function(){
+		searchHolder.innerHTML = "";
+		pageHolder.innerHTML = "";
+	}
+
+	var showLoader = function(){
+		pageHolder.innerHTML = templates.loader;
+	}
+
+	var showError = function(type){
+		if(type == "session-expiry"){
+			pageHolder.innerHTML = templates["sessionExpiry"];
+		}
 	}
 
 	// @public
@@ -160,7 +181,10 @@ FBS.View = function(){
 		on : on,
 		renderSearchResults : renderSearchResults,
 		renderPageDetails : renderPageDetails,
-		renderFavorites : renderFavorites
+		renderFavorites : renderFavorites,
+		reset : reset,
+		showLoader : showLoader,
+		showError : showError
 	}
 
 }();

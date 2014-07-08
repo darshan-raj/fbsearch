@@ -15,6 +15,13 @@ FBS.Model = function(){
 		}
 	}
 
+	var errorHandler = function(data){
+		var code = data.error.code;
+		if(code == "190"){
+			FBS.View.showError("session-expiry");
+		}
+	}
+
 	var setSearchResults = function(response){
 		var searchList,
 			item;
@@ -22,6 +29,7 @@ FBS.Model = function(){
 			searchList = response.data.slice(0, 50);
 		} else{
 			//handle error
+			errorHandler(response);
 			return;
 		}
 		model.searchResults = [];
@@ -43,16 +51,17 @@ FBS.Model = function(){
 
 		if(!data.id){
 			// handle error
+			errorHandler(data);
 			return;
 		}
 		dataOb.id = data.id;
 		dataOb.name = data.name;
 		dataOb.category = data.category;
-		dataOb.about = data.about || "This information is not public for this particular page";
+		dataOb.about = data.about || data.description || data.company_overview || "The details of this page is not publicly available.";
 		dataOb.image = "https://graph.facebook.com/" + data.id + "/picture?type=large";
 		dataOb.likes = data.likes;
-		dataOb.link = data.link;
-		dataOb.website = data.website;
+		dataOb.link = data.link || "";
+		dataOb.website = data.website || "";
 
 		model.pages[id] = dataOb;
 	}
@@ -70,6 +79,7 @@ FBS.Model = function(){
 			pageData = model.searchResults[pageIndex];
 		pageData.isFavorite = true;
 		model.favorites.push(pageData);
+		favsLookup[pageId] = model.favorites.length-1;
 		FBS.Utils.Store.set("favorites", model.favorites);
 	}
 

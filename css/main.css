@@ -3,9 +3,7 @@ body{
 	padding: 0px;
 	margin: 0px;
 }
-button{
 
-}
 div, section, header{
 	box-sizing:border-box;
 }
@@ -19,6 +17,13 @@ div, section, header{
 	height:0
 }
 
+.loader{
+	background:url("../images/spinner.gif") no-repeat top left;
+	width: 100%;
+	height: 150px;
+	background-position: 50%;
+}
+
 .main-header{
 	position: fixed;
 	top: 0px;	
@@ -26,26 +31,33 @@ div, section, header{
 }
 .control-bar{
 	background-color: #0c6a93;
-	padding: 8px;
+	padding: 8px 16px;
 }
 #content-header{
-	padding: 8px;
+	padding: 8px 16px;
 	background-color: #fff;
+	box-shadow:rgba(0, 0, 0, 0.2) 0px 0px 8px 3px;
 }
 
 #main-wrapper{
-	margin-top: 87px;
+	margin-top: 100px;
 }
 .fav-control{
 	float: right;
+	margin-top: 6px;
 }
 .search-control{
 	float: left;
 }
 #search-input{
 	padding: 6px;
-	width:250px;
+	width:275px;
 }
+#search-btn{
+	padding: 6px;
+	/*border-radius: 4px;*/
+}
+
 #fav-link{
 	color:#fff;
 	font-weight: bold;
@@ -58,7 +70,7 @@ div, section, header{
 #search-result-holder{
 	width: 40%;
 	float: left;
-	/*border: 1px solid #ccc;*/
+	padding: 0 12px;
 }
 #detail-holder{
 	width: 60%;
@@ -74,17 +86,20 @@ div, section, header{
 	cursor: pointer;
 }
 .row:hover{
-	background-color: #eee;
+	background-color: #FAFBFB;
+}
+.row.selected{
+	background-color: #E9EAED;
 }
 
-.fav, .name, .category{
+.row .fav, .row .name, .row .category{
 	float: left;
+	margin-right: 18px;
 }
 
 .fav{
 	width: 24px;
 	height: 24px;
-	margin-right: 20px;
 	background:url("../images/not-favorite.png") no-repeat top left;
 	background-size:contain;
 }
@@ -97,25 +112,41 @@ div, section, header{
 	background-size:contain;
 }
 .name{
-	width: 220px;
 	font-weight: bold;
 }
 .category{
-	/*width: 70px;*/
 	color: #666;
+	font-weight: bold;
+}
+
+.row .name{
+	width: 220px;
+}
+.row .category{
 	font-size: 12px;
-	font-weight: bold
 }
 
 .page-wrapper {
-
+	padding: 4px 18px;
 }
-
-.page-wrapper #page-name{
-	font-size: 14px;
+.page-wrapper div{
+	margin-bottom: 8px;
+}
+.page-wrapper .label{
 	font-weight: bold;
 }
-.page-wrapper #page-image{
+.page-wrapper .name{
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+.page-wrapper .category{
+}
+.page-wrapper .page-image-wrapper{
 	float: right;
+	width: 115px;
+	min-height: 115px;
+	margin-left: 12px;
+}
+.page-wrapper .page-image-wrapper #page-image{
 	width: 115px;
 }
