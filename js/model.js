@@ -27,12 +27,26 @@ FBS.Model = function(){
 		}
 	}
 
+	// sort the results in descending order of name
+	var sortResults = function(data){
+		data.sort(function(item1, item2){
+			if(item1.name > item2.name){
+				return -1;
+			} else if(item1.name < item2.name){
+				return 1;
+			} else{
+				return 0;
+			}
+		});
+	}
+
 	// process the search results
 	var setSearchResults = function(response){
 		var searchList,
 			item;
 		if(response.data){
 			searchList = response.data.slice(0, 50);
+			sortResults(searchList);
 		} else{
 			//handle error
 			errorHandler(response);

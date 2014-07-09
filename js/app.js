@@ -1,19 +1,22 @@
 // the controller
 var FBS = (function(){
-
+	// render the search results
 	var renderSearchResults = function(){
 		var data = FBS.Model.getData("search");
 		FBS.View.renderSearchResults(data);
 	}
 
+	// save a page as favorite
 	var makeAsFavorite = function(pageId){
 		FBS.Model.addFavorite(pageId);
 	}
 
+	// remove a favorited page
  	var removeAsFavorite = function(pageId){
  		FBS.Model.removeFavorite(pageId);
  	}
 
+ 	// fetch and show the details of a page
 	var showPageDetails = function(pageId){
 		// the page details is getting cached if fetched once
 		if(FBS.Model.getData("page", pageId)){
@@ -48,6 +51,8 @@ var FBS = (function(){
 		FBS.View.renderFavorites(FBS.Model.getData("favorites"));
 	}
 
+	// @public
+	// initialize the app and related modules
 	var init = function(config){
 		var favorites;
 

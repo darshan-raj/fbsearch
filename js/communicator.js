@@ -27,6 +27,8 @@ FBS.Communicator = function(){
 		fireRequest(query);
 	}
 
+	// set the access token. 
+	// used when refreshing a token
 	var setToken = function(newToken){
 		token = newToken;
 	}

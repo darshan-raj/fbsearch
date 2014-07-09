@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Refresh token</title>
+		<style type="text/css">
+			body{
+				font-family: Arial;
+			}
+			.wrapper{
+				border: 3px solid #aaa;
+				border-radius: 10px;
+				width: 670px;
+				padding: 0px 16px;
+				margin: 0 auto;
+				font-size: 16px;
+			}
+			li{
+				margin-bottom: 6px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<p>Steps to refresh the access token</p>
+			<ol>
+				<li>
+					Click <a href="https://developers.facebook.com/tools/explorer/" target="_blank">here</a> to get a new access token
+				</li>
+				<li>
+					You may have to login to your facebook account
+				</li>
+				<li>
+					Click the "Get Access Token" button
+				</li>
+				<li>
+					Choose any of the available options in the pop up (just "user_birthday" would suffice too)
+				</li>
+				<li>
+					Copy the access token generated and paste it in the input box below and click "Done" <br>
+					<input id="token" /><button onclick="saveToken()">Done</button>
+				</li>
+				<li>
+					Click <a id="new-link" href="#">here</a> and continue using the app! :-) <br>
+					In case the app does not open, copy paste the url given below <br>
+					<textarea id="url"></textarea>
+				</li>
+			</ol>
+			
+		</div>		
+	</body>
+
+	<script>
+		function saveToken(){
+			var currentURL = window.location.href,
+				token = document.querySelector("#token").value,
+				newURL = currentURL.replace("admin/access-token", "index") + "?token=" + token;
+			document.querySelector("#url").value = newURL;
+			document.querySelector("#new-link").href = newURL;
+		}
+	</script>
+</html>

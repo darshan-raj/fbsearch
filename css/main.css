@@ -30,13 +30,13 @@ div, section, header{
 	width: 100%;
 }
 .control-bar{
-	background-color: #0c6a93;
+	background-color: #bf360c;
 	padding: 8px 16px;
 }
 #content-header{
 	padding: 8px 16px;
 	background-color: #fff;
-	box-shadow:rgba(0, 0, 0, 0.2) 0px 0px 8px 3px;
+	box-shadow:0px 6px 10px -5px #ccc;
 }
 
 #main-wrapper{
@@ -55,7 +55,6 @@ div, section, header{
 }
 #search-btn{
 	padding: 6px;
-	/*border-radius: 4px;*/
 }
 
 #fav-link{
@@ -121,6 +120,8 @@ div, section, header{
 
 .row .name{
 	width: 220px;
+	max-height: 32px;
+	overflow: hidden;
 }
 .row .category{
 	font-size: 12px;
@@ -138,8 +139,6 @@ div, section, header{
 .page-wrapper .name{
 	font-size: 20px;
 	margin-bottom: 10px;
-}
-.page-wrapper .category{
 }
 .page-wrapper .page-image-wrapper{
 	float: right;

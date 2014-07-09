@@ -20,7 +20,7 @@ FBS.View = function(){
 							'<div><span class="label">Website : </span><a id="page-website" href="{WEBSITE_LINK}" target="_blank">{WEBSITE_LINK}</a></div>' +
 						'</div>',
 		"loader" : '<div class="loader"></div>',
-		"sessionExpiry" : '<div>The access token has expired</div>'
+		"sessionExpiry" : '<div>The access token has expired. Please click <a href="admin/access-token.html" target="_blank">here</a> to refresh the token</div>'
 	}
 
 	var searchHolder,
@@ -54,6 +54,7 @@ FBS.View = function(){
 		domEl.querySelector(".fav").addEventListener("click", this.favoriteHandler.bind(this));
 	}
 
+	// handler for a search item selection
 	SearchListItem.prototype.onItemSelect = function(e){
 		var currentSelected;
 		this.onSelect && this.onSelect.call(this, this.pageId);
@@ -65,6 +66,7 @@ FBS.View = function(){
 		this.viewEl.classList.add("selected");
 	}
 
+	// handler for click of the favorite control
 	SearchListItem.prototype.favoriteHandler = function(e){
 		var mode = this.holder.getAttribute("data-mode");
 		e.stopPropagation();
@@ -100,6 +102,9 @@ FBS.View = function(){
 	// renders the list view
 	var renderList = function(data){
 		var searchItem;
+		if(data.length == 0){
+			searchHolder.innerHTML = "<b>No results</b>";
+		}
 		for(var i=0, len=data.length; i<len; i++){
 			searchItem = new SearchListItem();
 			searchItem.pageId = data[i].pageId;
@@ -164,6 +169,7 @@ FBS.View = function(){
 		pageHolder.innerHTML = templates.loader;
 	}
 
+	// show the error messages
 	var showError = function(type){
 		if(type == "session-expiry"){
 			pageHolder.innerHTML = templates["sessionExpiry"];

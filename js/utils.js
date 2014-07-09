@@ -7,6 +7,7 @@ FBS.Utils = function(){
 		return el.firstChild;
 	}
 
+	// util to read a url param
 	var extractParamFromUrl = function(url, name){
 		var queryString = url.split("?");
 		if(queryString.length>1){
