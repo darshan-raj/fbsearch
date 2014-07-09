@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Refresh token</title>
+		<style type="text/css">
+			body{
+				font-family: Arial;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<ul>
+				<li>
+					1. Click <a href="https://developers.facebook.com/tools/explorer/" target="_blank">here</a> to get a new access token
+				</li>
+				<li>
+					2. You may have to login to your facebook account
+				</li>
+				<li>
+					3. Click the "Get Access Token" button
+				</li>
+				<li>
+					4. Paste the token value shown in the input box below and click "Done"
+					<input id="token" /><button onclick="saveToken()">Done</button>
+				</li>
+				<li>
+					5. Start using the app with the url shown below
+					<input id="url" />
+				</li>
+			</ul>
+			
+		</div>		
+	</body>
+
+	<script>
+		function saveToken(){
+			var token = document.querySelector("#token").value;
+			document.querySelector("#url").value = "/?toke=" + token;
+		}
+	</script>
+</html>

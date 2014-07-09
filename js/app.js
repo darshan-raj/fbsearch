@@ -1,3 +1,4 @@
+// the controller
 var FBS = (function(){
 
 	var renderSearchResults = function(){
@@ -8,14 +9,10 @@ var FBS = (function(){
 	var makeAsFavorite = function(pageId){
 		FBS.Model.addFavorite(pageId);
 	}
+
  	var removeAsFavorite = function(pageId){
  		FBS.Model.removeFavorite(pageId);
  	}
-
-	var showFavorites = function(){
-		FBS.View.reset();
-		FBS.View.renderFavorites(FBS.Model.getData("favorites"));
-	}
 
 	var showPageDetails = function(pageId){
 		// the page details is getting cached if fetched once
@@ -32,7 +29,8 @@ var FBS = (function(){
 		}
 	}
 
-	// the public api that can be called from the target page
+	// @public
+	// api that can be called from the target page
 	var doSearch = function(term){
 		FBS.Communicator.searchPages(term, function(response){
 			if(response){
@@ -41,6 +39,13 @@ var FBS = (function(){
 			}
 		});
 		FBS.View.reset();
+	}
+
+	// @public
+	// shows the favorites
+	var showFavorites = function(){
+		FBS.View.reset();
+		FBS.View.renderFavorites(FBS.Model.getData("favorites"));
 	}
 
 	var init = function(config){

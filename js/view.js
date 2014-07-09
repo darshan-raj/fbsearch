@@ -1,3 +1,4 @@
+// the view
 FBS.View = function(){
 	var templates = {
 		"searchList" : '<div class="row" data-page-id="{PAGE_ID}";>' +
@@ -152,11 +153,13 @@ FBS.View = function(){
 		pageHolder.appendChild(viewEl);
 	}
 
+	// reset all the existing view elements
 	var reset = function(){
 		searchHolder.innerHTML = "";
 		pageHolder.innerHTML = "";
 	}
 
+	// show the wait spinner
 	var showLoader = function(){
 		pageHolder.innerHTML = templates.loader;
 	}

@@ -27,6 +27,9 @@
 
 	<script>
 		(function(){
+			var token;
+
+			// calls the search api
 			var doSearch = function(){
 				var searchTerm = document.querySelector("#search-input").value.trim();
 				if(searchTerm){
@@ -54,6 +57,12 @@
 					FBS.showFavorites();
 					document.querySelector("#content-header").textContent = "My Favorites";
 			});
+
+			// check if an access token is passed in the url
+			token = FBS.Utils.extractParamFromUrl(window.location.href, "token");
+			if(token){
+				FBS.Communicator.setToken(token);
+			}
 
 			// bootstrap the libraries
 			FBS.init({
