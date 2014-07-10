@@ -1,6 +1,6 @@
 // the module that communcates with the graph api of facebook using jsonp
 FBS.Communicator = function(){
-	var token = "CAACEdEose0cBAOolnwZCvPlTf1ycdaodhHZBEZAYLV1ZC1dPNnag31OdVmRHkghGLAuJsenvymiZBwgMLTQiuJd80ZCCLLsKQyCJg3pwokAAAwXiypeDc1wKEdU9jcZC8SeJ4DdoLaLOOsELK5zAE19SNb16hcMBKJrGSxYcoNUS5AITuHyaC8cz5GuOMfwQZAYZD";
+	var token = "CAACEdEose0cBAKNvTDojk9F3RBn5d0ZCwsVXUnUGYZCqtiRjw4WjxlZAtXfGmTUjANiMtuFdewQcwPEnQVBWknQ6x2QAypvTqUnlxCNijL1uCQVHIOTdqqcE4C6iZBGOtueM1kdcepl2f9WU5eLvzRZCd7mLNpyZA4goQtpMfn0ZCBt14O6s4dawMmULzdiiC8ZD";
 	var appCallback;		// the callback of the app to be called after receiving the jsonp response
 
 	var fireRequest = function(query){
